@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class Siguiente : MonoBehaviour
 {
-    public Patrullaje trulla;
+    //definimos  la variable patrulla que vamos a heredar del codigo de patrullaje
+    public Patrullaje patrulla;
     void Start()
     {
-        
-        trulla = FindObjectOfType<Patrullaje>();
+        //igualamos patrulla con el objeto findobjectoftype
+        patrulla = FindObjectOfType<Patrullaje>();
+        //guarda una nueva posicion 
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        trulla.puntosMovimientos.Add(transform);
-        
-    }
+        //agrega la posicion del nuevo punto a la lista que creamos en el codigo de patrullaje
+        patrulla.puntosMovimientos.Add(transform);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

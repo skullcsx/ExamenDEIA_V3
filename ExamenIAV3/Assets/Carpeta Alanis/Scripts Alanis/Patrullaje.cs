@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Patrullaje : MonoBehaviour
 {
+    //definimos las variables que usaremos para la lista de los puntos de movimiento
     [SerializeField] private float velocidadMovimiento;
    
     [SerializeField] private float distanciaMinima;
@@ -12,21 +13,19 @@ public class Patrullaje : MonoBehaviour
     public float speed;
     public GameObject wp;
     public List<Transform> puntosMovimientos = new List<Transform>();
-    
-    // Start is called before the first frame update
-    private void Start()
-    {
-        
-    }
 
-   
+
    private void Update()
-    {
+   {
+        //usamos el transform.position para guardar la posicion e ir al siguiente punto que se crea en la lista
         transform.position = Vector2.MoveTowards(transform.position, puntosMovimientos[siguientePaso].position, velocidadMovimiento * Time.deltaTime);
 
+        //se crea la comprobacion de si vector2.distance es menor a la distancia minima
         if (Vector2.Distance(transform.position, puntosMovimientos[siguientePaso].position) < distanciaMinima)
         {
+            //si si aumentamos uno al siguientepaso
             siguientePaso +=1;
+            //y si es mayor o igual al contador igualamos a 0 el siguientepaso
             if (siguientePaso >= puntosMovimientos.Count)
             {
                 siguientePaso = 0;
@@ -35,10 +34,9 @@ public class Patrullaje : MonoBehaviour
     }
     void FixedUpdate()
     {
-        
+        //utilizamos el boton izquierdo del mouse para crear los puntos por los cuales pasara nuestro agente square
         if (Input.GetMouseButtonDown(0) )
         {
-            
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
             Instantiate(wp, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
         }
